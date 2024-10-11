@@ -1,11 +1,6 @@
-// src/components/Sidebar.js
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { addElement } from '../redux/elementsSlice';
 
 const Sidebar = () => {
-  const dispatch = useDispatch();
-
   const handleDragStart = (event, type) => {
     event.dataTransfer.setData('elementType', type);
   };
