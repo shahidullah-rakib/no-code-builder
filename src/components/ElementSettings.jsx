@@ -1,88 +1,121 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { updateElement } from '../redux/elementsSlice';
 
 const ElementSettings = ({ element }) => {
   const dispatch = useDispatch();
+  const [content, setContent] = useState(element.content || ''); // Default to empty string
+  const [fontSize, setFontSize] = useState(element.styles.fontSize || '16px');
+  const [fontColor, setFontColor] = useState(element.styles.color || '#000000');
 
-  const handleUpdate = (field, value) => {
+  // For image resizing and content
+  const [imageSrc, setImageSrc] = useState(element.content || '');
+  const [width, setWidth] = useState(element.styles.width || '100px');
+  const [height, setHeight] = useState(element.styles.height || '100px');
+
+  useEffect(() => {
+    // When element changes, update local state
+    setContent(element.content);
+    setFontSize(element.styles.fontSize || '16px');
+    setFontColor(element.styles.color || '#000000');
+    setImageSrc(element.content);
+    setWidth(element.styles.width || '100px');
+    setHeight(element.styles.height || '100px');
+  }, [element]);
+
+  // Dispatch update for both text and images
+  const dispatchUpdate = () => {
+    const updatedStyles =
+      element.type === 'text'
+        ? { fontSize, color: fontColor }
+        : { width, height };
+
     dispatch(
       updateElement({
-        id: element.id,
-        styles: {
-          ...element.styles,
-          [field]: value,
-        },
-        content: field === 'content' ? value : element.content,
+        ...element,
+        content: element.type === 'text' ? content : imageSrc, // Handle content for both text and image
+        styles: { ...element.styles, ...updatedStyles },
       })
     );
   };
 
+  // Handle image upload
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const imageUrl = URL.createObjectURL(file);
+      setImageSrc(imageUrl);
+      dispatchUpdate(); // Trigger the image update in the store
+    }
+  };
+
   return (
-    <div className="w-1/3 p-4 bg-white border">
-      <h3>Element Settings</h3>
+    <div className="w-1/4 p-4 bg-gray-100 h-screen">
+      <h2 className="text-xl font-bold mb-4">Element Settings</h2>
+
+      {/* Text settings */}
       {element.type === 'text' && (
-        <>
-          <label>
-            Text Content:
-            <input
-              type="text"
-              value={element.content}
-              onChange={(e) => handleUpdate('content', e.target.value)}
-              className="block p-2 border"
-            />
-          </label>
-          <label>
-            Font Size:
-            <input
-              type="number"
-              value={parseInt(element.styles.fontSize)}
-              onChange={(e) => handleUpdate('fontSize', `${e.target.value}px`)}
-              className="block p-2 border"
-            />
-          </label>
-          <label>
-            Text Color:
-            <input
-              type="color"
-              value={element.styles.color}
-              onChange={(e) => handleUpdate('color', e.target.value)}
-              className="block p-2 border"
-            />
-          </label>
-        </>
+        <div>
+          <label>Content:</label>
+          <textarea
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            onBlur={dispatchUpdate} // Trigger update on blur
+            className="border p-2 w-full"
+          />
+          <label>Font Size:</label>
+          <input
+            type="number"
+            value={parseInt(fontSize)}
+            onChange={(e) => setFontSize(e.target.value + 'px')}
+            onBlur={dispatchUpdate}
+            className="border p-2 w-full"
+          />
+          <label>Font Color:</label>
+          <input
+            type="color"
+            value={fontColor}
+            onChange={(e) => setFontColor(e.target.value)}
+            onBlur={dispatchUpdate}
+            className="border p-2 w-full"
+          />
+        </div>
       )}
+
+      {/* Image settings */}
       {element.type === 'image' && (
-        <>
-          <label>
-            Image URL:
-            <input
-              type="text"
-              value={element.content}
-              onChange={(e) => handleUpdate('content', e.target.value)}
-              className="block p-2 border"
-            />
-          </label>
-          <label>
-            Width:
-            <input
-              type="number"
-              value={element.styles.width}
-              onChange={(e) => handleUpdate('width', `${e.target.value}px`)}
-              className="block p-2 border"
-            />
-          </label>
-          <label>
-            Height:
-            <input
-              type="number"
-              value={element.styles.height}
-              onChange={(e) => handleUpdate('height', `${e.target.value}px`)}
-              className="block p-2 border"
-            />
-          </label>
-        </>
+        <div>
+          <label>Upload Image:</label>
+          <input type="file" onChange={handleImageUpload} />
+          <label>Width:</label>
+          <input
+            type="range"
+            min="50"
+            max="500"
+            value={parseInt(width)}
+            onChange={(e) => setWidth(e.target.value + 'px')}
+            onMouseUp={dispatchUpdate} // Trigger update on mouse release
+            className="w-full"
+          />
+          <label>Height:</label>
+          <input
+            type="range"
+            min="50"
+            max="500"
+            value={parseInt(height)}
+            onChange={(e) => setHeight(e.target.value + 'px')}
+            onMouseUp={dispatchUpdate} // Trigger update on mouse release
+            className="w-full"
+          />
+        </div>
       )}
+
+      <button
+        onClick={dispatchUpdate} // Trigger update on button click
+        className="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
+      >
+        Update
+      </button>
     </div>
   );
 };

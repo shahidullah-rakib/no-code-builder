@@ -18,9 +18,10 @@ const elementsSlice = createSlice({
       if (index !== -1) {
         state.elements[index] = {
           ...state.elements[index],
+          content: action.payload.content || state.elements[index].content, // Update content (text or image source)
           styles: {
             ...state.elements[index].styles,
-            ...action.payload.styles, // merge updated styles
+            ...action.payload.styles, // Merge updated styles
           },
         };
       }

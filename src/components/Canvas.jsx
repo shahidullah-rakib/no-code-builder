@@ -13,10 +13,10 @@ const Canvas = ({ setSelectedElement }) => {
       const newElement = {
         id: Date.now(),
         type: elementType,
-        content: elementType === 'text' ? 'New Text' : 'Image URL',
+        content: elementType === 'text' ? 'New Text' : '', // Empty content for image
         styles: {
-          width: 100,
-          height: 100,
+          width: '100px',
+          height: '100px',
           fontSize: '16px',
           color: '#000',
           x: 0,
@@ -76,19 +76,19 @@ const Canvas = ({ setSelectedElement }) => {
         >
           {el.type === 'text' ? (
             <p
+              className="border border-black"
               style={{
                 fontSize: el.styles.fontSize,
                 color: el.styles.color,
-                width: 'auto',
-                height: 'auto',
               }}
             >
               {el.content}
             </p>
           ) : (
             <img
+              className="border border-black"
               src={el.content}
-              alt="Dropped"
+              alt="Uploaded"
               style={{
                 width: el.styles.width,
                 height: el.styles.height,
