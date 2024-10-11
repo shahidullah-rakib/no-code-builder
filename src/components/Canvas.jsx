@@ -80,6 +80,11 @@ const Canvas = ({ setSelectedElement }) => {
               style={{
                 fontSize: el.styles.fontSize,
                 color: el.styles.color,
+                fontFamily: el.styles.fontFamily,
+                fontStyle: el.styles.fontStyle,
+                lineHeight: el.styles.lineHeight,
+                letterSpacing: el.styles.letterSpacing,
+                textAlign: el.styles.textAlign,
               }}
             >
               {el.content}
