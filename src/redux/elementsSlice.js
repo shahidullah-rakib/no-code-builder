@@ -16,10 +16,15 @@ const elementsSlice = createSlice({
         (el) => el.id === action.payload.id
       );
       if (index !== -1) {
-        state.elements[index] = action.payload;
+        state.elements[index] = {
+          ...state.elements[index],
+          styles: {
+            ...state.elements[index].styles,
+            ...action.payload.styles, // merge updated styles
+          },
+        };
       }
     },
-    // Add other reducers as necessary
   },
 });
 
