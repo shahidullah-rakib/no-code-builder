@@ -13,6 +13,18 @@ const ElementSettings = ({ element }) => {
   const [fontFamily, setFontFamily] = useState(
     element.styles.fontFamily || 'Arial'
   ); // New state for font family
+  const [fontStyle, setFontStyle] = useState(
+    element.styles.fontStyle || 'normal'
+  ); // New state for font style
+  const [lineHeight, setLineHeight] = useState(
+    element.styles.lineHeight || '1.5'
+  ); // New state for line height
+  const [letterSpacing, setLetterSpacing] = useState(
+    element.styles.letterSpacing || '0px'
+  ); // New state for letter spacing
+  const [listStyleType, setListStyleType] = useState(
+    element.styles.listStyleType || 'none'
+  ); // New state for list style type
 
   // For image resizing and content
   const [imageSrc, setImageSrc] = useState(element.content || '');
@@ -29,14 +41,22 @@ const ElementSettings = ({ element }) => {
     setHeight(element.styles.height || '100px');
     setTextAlign(element.styles.textAlign || 'left'); // Update textAlign state
     setFontFamily(element.styles.fontFamily || 'Arial'); // Update fontFamily state
+    setFontStyle(element.styles.fontStyle || 'normal'); // Update fontStyle state
+    setLineHeight(element.styles.lineHeight || '1.5'); // Update lineHeight state
+    setLetterSpacing(element.styles.letterSpacing || '0px'); // Update letterSpacing state
+    setListStyleType(element.styles.listStyleType || 'none'); // Update listStyleType state
   }, [element]);
 
   const dispatchUpdate = () => {
     const updatedStyles = {
       fontSize,
       color: fontColor,
-      textAlign, // Include text alignment in updated styles
-      fontFamily, // Include font family in updated styles
+      textAlign,
+      fontFamily,
+      fontStyle, // Include font style in updated styles
+      lineHeight, // Include line height in updated styles
+      letterSpacing, // Include letter spacing in updated styles
+      listStyleType, // Include list style type in updated styles
     };
 
     dispatch(
@@ -118,6 +138,63 @@ const ElementSettings = ({ element }) => {
             <option value="Times New Roman">Times New Roman</option>
             <option value="Courier New">Courier New</option>
             {/* Add more font options as needed */}
+          </select>
+
+          {/* Font Style Selection */}
+          <label>Font Style:</label>
+          <select
+            value={fontStyle}
+            onChange={(e) => {
+              setFontStyle(e.target.value);
+              dispatchUpdate(); // Update when changing font style
+            }}
+            className="border p-2 w-full"
+          >
+            <option value="normal">Normal</option>
+            <option value="italic">Italic</option>
+            <option value="bold">Bold</option>
+          </select>
+
+          {/* Line Height Input */}
+          <label>Line Height:</label>
+          <input
+            type="number"
+            value={parseFloat(lineHeight)}
+            onChange={(e) => {
+              setLineHeight(e.target.value);
+              dispatchUpdate(); // Update when changing line height
+            }}
+            className="border p-2 w-full"
+            step="0.1"
+          />
+
+          {/* Letter Spacing Input */}
+          <label>Letter Spacing:</label>
+          <input
+            type="number"
+            value={parseFloat(letterSpacing)}
+            onChange={(e) => {
+              setLetterSpacing(e.target.value + 'px');
+              dispatchUpdate(); // Update when changing letter spacing
+            }}
+            className="border p-2 w-full"
+            step="0.1"
+          />
+
+          {/* List Style Type Selection */}
+          <label>List Style Type:</label>
+          <select
+            value={listStyleType}
+            onChange={(e) => {
+              setListStyleType(e.target.value);
+              dispatchUpdate(); // Update when changing list style type
+            }}
+            className="border p-2 w-full"
+          >
+            <option value="none">None</option>
+            <option value="disc">Dot (disc)</option>
+            <option value="circle">Circle</option>
+            <option value="decimal">Numbered</option>
           </select>
         </div>
       )}
