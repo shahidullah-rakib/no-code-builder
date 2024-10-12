@@ -20,11 +20,11 @@ const elementsSlice = createSlice({
           ...state.elements[index],
           styles: {
             ...state.elements[index].styles,
-            ...action.payload.styles, // merge updated styles
+            ...action.payload.styles,
           },
         };
         if (action.payload.content) {
-          state.elements[index].content = action.payload.content; // update content if provided
+          state.elements[index].content = action.payload.content;
         }
       }
     },

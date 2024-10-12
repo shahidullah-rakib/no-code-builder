@@ -82,7 +82,7 @@ const Canvas = ({ setSelectedElement }) => {
             bottomRight: true,
             bottomLeft: true,
             topLeft: true,
-          }} // Enable resizing in all directions
+          }}
         >
           {el.type === 'text' ? (
             <p
@@ -90,15 +90,10 @@ const Canvas = ({ setSelectedElement }) => {
               style={{
                 fontSize: el.styles.fontSize,
                 color: el.styles.color,
-                fontFamily: el.styles.fontFamily,
-                fontStyle: el.styles.fontStyle,
-                lineHeight: el.styles.lineHeight,
-                letterSpacing: el.styles.letterSpacing,
-                textAlign: el.styles.textAlign,
-                width: el.styles.width, // Control width
-                height: el.styles.height, // Control height
-                overflow: 'hidden', // Hide overflow text
-                wordWrap: 'break-word', // Wrap long text
+                width: el.styles.width,
+                height: el.styles.height,
+                overflow: 'hidden',
+                wordWrap: 'break-word',
               }}
             >
               {el.content}
