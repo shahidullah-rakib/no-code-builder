@@ -7,16 +7,16 @@ const ElementSettings = ({ element }) => {
   const [content, setContent] = useState(element.content || ''); // Default to empty string
   const [fontSize, setFontSize] = useState(element.styles.fontSize || '16px');
   const [fontColor, setFontColor] = useState(element.styles.color || '#000000');
-  const [fontFamily, setFontFamily] = useState(element.styles.fontFamily);
-  const [fontStyle, setFontStyle] = useState(element.styles.fontStyle);
-  const [lineHeight, setLineHeight] = useState(element.styles.lineHeight);
-  const [letterSpacing, setLetterSpacing] = useState(
-    element.styles.letterSpacing
-  );
-  const [textAlign, setTextAlign] = useState(element.styles.textAlign);
-  const [listStyleType, setListStyleType] = useState(
-    element.styles.listStyleType || 'none'
-  );
+  // const [fontFamily, setFontFamily] = useState(element.styles.fontFamily);
+  // const [fontStyle, setFontStyle] = useState(element.styles.fontStyle);
+  // const [lineHeight, setLineHeight] = useState(element.styles.lineHeight);
+  // const [letterSpacing, setLetterSpacing] = useState(
+  //   element.styles.letterSpacing
+  // );
+  // const [textAlign, setTextAlign] = useState(element.styles.textAlign);
+  // const [listStyleType, setListStyleType] = useState(
+  //   element.styles.listStyleType || 'none'
+  // );
 
   // For image resizing and content
   const [imageSrc, setImageSrc] = useState(element.content || '');
@@ -31,12 +31,12 @@ const ElementSettings = ({ element }) => {
     setImageSrc(element.content);
     setWidth(element.styles.width || '100px');
     setHeight(element.styles.height || '100px');
-    setFontFamily(element.styles.fontFamily || 'Arial');
-    setFontStyle(element.styles.fontStyle || 'normal');
-    setLineHeight(element.styles.lineHeight || '1.5');
-    setLetterSpacing(element.styles.letterSpacing || '0px');
-    setTextAlign(element.styles.textAlign || 'left');
-    setListStyleType(element.styles.listStyleType || 'none');
+    // setFontFamily(element.styles.fontFamily || 'Arial');
+    // setFontStyle(element.styles.fontStyle || 'normal');
+    // setLineHeight(element.styles.lineHeight || '1.5');
+    // setLetterSpacing(element.styles.letterSpacing || '0px');
+    // setTextAlign(element.styles.textAlign || 'left');
+    // setListStyleType(element.styles.listStyleType || 'none');
   }, [element]);
 
   // Dispatch update for both text and images
@@ -46,12 +46,12 @@ const ElementSettings = ({ element }) => {
         ? {
             fontSize,
             color: fontColor,
-            fontFamily,
-            fontStyle,
-            lineHeight,
-            letterSpacing,
-            textAlign,
-            listStyleType,
+            // fontFamily,
+            // fontStyle,
+            // lineHeight,
+            // letterSpacing,
+            // textAlign,
+            // listStyleType,
           }
         : { width, height };
 
@@ -104,8 +104,8 @@ const ElementSettings = ({ element }) => {
             onBlur={dispatchUpdate}
             className="border p-4 w-full h-10"
           />
-          {/* Text Alignment */}
-          <label>Text Alignment:</label>
+
+          {/* <label>Text Alignment:</label>
           <select
             value={textAlign}
             onChange={(e) => setTextAlign(e.target.value)}
@@ -117,7 +117,6 @@ const ElementSettings = ({ element }) => {
             <option value="justify">Justify</option>
           </select>
 
-          {/* Font Family */}
           <label>Font Family:</label>
           <select
             value={fontFamily}
@@ -127,10 +126,7 @@ const ElementSettings = ({ element }) => {
             <option value="Arial">Arial</option>
             <option value="Times New Roman">Times New Roman</option>
             <option value="Courier New">Courier New</option>
-            {/* Add more font options as needed */}
           </select>
-
-          {/* Font Style */}
           <label>Font Style:</label>
           <select
             value={fontStyle}
@@ -141,8 +137,6 @@ const ElementSettings = ({ element }) => {
             <option value="italic">Italic</option>
             <option value="bold">Bold</option>
           </select>
-
-          {/* Line Height */}
           <label>Line Height:</label>
           <input
             type="number"
@@ -151,8 +145,6 @@ const ElementSettings = ({ element }) => {
             className="border p-2 w-full"
             step="0.1"
           />
-
-          {/* Letter Spacing */}
           <label>Letter Spacing:</label>
           <input
             type="number"
@@ -161,8 +153,6 @@ const ElementSettings = ({ element }) => {
             className="border p-2 w-full"
             step="0.1"
           />
-
-          {/* List Type */}
           <label>List Style Type:</label>
           <select
             value={listStyleType}
@@ -173,7 +163,7 @@ const ElementSettings = ({ element }) => {
             <option value="disc">Dot (disc)</option>
             <option value="circle">Circle</option>
             <option value="decimal">Numbered</option>
-          </select>
+          </select> */}
         </div>
       )}
 
