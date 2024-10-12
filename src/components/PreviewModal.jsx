@@ -9,7 +9,7 @@ const PreviewModal = ({ isOpen, onClose, elements }) => {
         <h2 className="text-lg font-bold mb-4">Preview</h2>
 
         {/* Preview Container */}
-        <div className="border p-4 relative h-96 bg-gray-100">
+        <div className="border p-4 relative h-96 bg-gray-100 overflow-auto">
           {elements.map((el) => (
             <div
               key={el.id}

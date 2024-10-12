@@ -102,7 +102,7 @@ const ElementSettings = ({ element }) => {
             value={fontColor}
             onChange={(e) => setFontColor(e.target.value)}
             onBlur={dispatchUpdate}
-            className="border p-2 w-full"
+            className="border p-4 w-full h-10"
           />
           {/* Text Alignment */}
           <label>Text Alignment:</label>
