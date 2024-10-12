@@ -10,6 +10,9 @@ const ElementSettings = ({ element }) => {
   const [textAlign, setTextAlign] = useState(
     element.styles.textAlign || 'left'
   ); // New state for text alignment
+  const [fontFamily, setFontFamily] = useState(
+    element.styles.fontFamily || 'Arial'
+  ); // New state for font family
 
   // For image resizing and content
   const [imageSrc, setImageSrc] = useState(element.content || '');
@@ -25,17 +28,16 @@ const ElementSettings = ({ element }) => {
     setWidth(element.styles.width || '100px');
     setHeight(element.styles.height || '100px');
     setTextAlign(element.styles.textAlign || 'left'); // Update textAlign state
+    setFontFamily(element.styles.fontFamily || 'Arial'); // Update fontFamily state
   }, [element]);
 
   const dispatchUpdate = () => {
-    const updatedStyles =
-      element.type === 'text'
-        ? {
-            fontSize,
-            color: fontColor,
-            textAlign, // Include text alignment in updated styles
-          }
-        : { width, height };
+    const updatedStyles = {
+      fontSize,
+      color: fontColor,
+      textAlign, // Include text alignment in updated styles
+      fontFamily, // Include font family in updated styles
+    };
 
     dispatch(
       updateElement({
@@ -100,6 +102,22 @@ const ElementSettings = ({ element }) => {
             <option value="center">Center</option>
             <option value="right">Right</option>
             <option value="justify">Justify</option>
+          </select>
+
+          {/* Font Family Selection */}
+          <label>Font Family:</label>
+          <select
+            className="border p-2 w-full"
+            value={fontFamily}
+            onChange={(e) => {
+              setFontFamily(e.target.value);
+              dispatchUpdate(); // Update when changing font family
+            }}
+          >
+            <option value="Arial">Arial</option>
+            <option value="Times New Roman">Times New Roman</option>
+            <option value="Courier New">Courier New</option>
+            {/* Add more font options as needed */}
           </select>
         </div>
       )}

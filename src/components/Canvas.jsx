@@ -95,6 +95,7 @@ const Canvas = ({ setSelectedElement }) => {
                 overflow: 'hidden',
                 wordWrap: 'break-word',
                 textAlign: el.styles.textAlign, // Add text alignment here
+                fontFamily: el.styles.fontFamily, // Add font family here
               }}
             >
               {el.content}
