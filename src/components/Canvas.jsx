@@ -73,6 +73,16 @@ const Canvas = ({ setSelectedElement }) => {
           }
           bounds="parent"
           onClick={() => setSelectedElement(el)}
+          enableResizing={{
+            top: true,
+            right: true,
+            bottom: true,
+            left: true,
+            topRight: true,
+            bottomRight: true,
+            bottomLeft: true,
+            topLeft: true,
+          }} // Enable resizing in all directions
         >
           {el.type === 'text' ? (
             <p
@@ -85,6 +95,10 @@ const Canvas = ({ setSelectedElement }) => {
                 lineHeight: el.styles.lineHeight,
                 letterSpacing: el.styles.letterSpacing,
                 textAlign: el.styles.textAlign,
+                width: el.styles.width, // Control width
+                height: el.styles.height, // Control height
+                overflow: 'hidden', // Hide overflow text
+                wordWrap: 'break-word', // Wrap long text
               }}
             >
               {el.content}
