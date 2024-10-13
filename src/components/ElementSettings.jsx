@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { updateElement } from '../redux/elementsSlice';
+import AlignLeftTextIcon from './svgComponents/alignLeftTextIcon';
+import AlignRightTextIcon from './svgComponents/alignRightTextIcon';
+import CenterTextIcon from './svgComponents/centerTextIcon';
+import JustifyLeftTextIcon from './svgComponents/justifyLeftTextIcon';
 
 const ElementSettings = ({ element }) => {
   const dispatch = useDispatch();
@@ -74,7 +78,7 @@ const ElementSettings = ({ element }) => {
   };
 
   return (
-    <div className="w-1/4 p-4 bg-gray-100 h-screen">
+    <div className="w-1/4 p-4 bg-gray-100 h-full overflow-y-auto">
       <h2 className="text-xl font-bold mb-4">Element Settings</h2>
 
       {/* Text settings */}
@@ -95,14 +99,26 @@ const ElementSettings = ({ element }) => {
             onBlur={dispatchUpdate}
             className="border p-2 w-full"
           />
-          <label>Font Color:</label>
-          <input
-            type="color"
-            value={fontColor}
-            onChange={(e) => setFontColor(e.target.value)}
-            onBlur={dispatchUpdate}
-            className="border p-4 w-full h-10"
-          />
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Font Color
+            </label>
+            <div className="flex items-center space-x-2">
+              <input
+                type="color"
+                value={fontColor}
+                onChange={(e) => setFontColor(e.target.value)}
+                onBlur={dispatchUpdate}
+                className="border p-2 w-12 h-12"
+              />
+              <input
+                type="text"
+                value={fontColor}
+                onChange={(e) => setFontColor(e.target.value)}
+                className="border p-2 w-full"
+              />
+            </div>
+          </div>
 
           <label>Text Alignment:</label>
           <select

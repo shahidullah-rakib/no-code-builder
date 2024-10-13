@@ -57,7 +57,7 @@ const Canvas = ({ setSelectedElement }) => {
     <div
       onDrop={handleDrop}
       onDragOver={(e) => e.preventDefault()}
-      className="w-2/3 h-screen p-4 bg-gray-50 border"
+      className="w-full h-screen p-4 bg-gray-50 border overflow-auto"
     >
       {elements.map((el) => (
         <Rnd

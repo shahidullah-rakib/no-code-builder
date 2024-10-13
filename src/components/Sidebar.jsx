@@ -6,7 +6,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="w-1/4 p-4 bg-gray-100 h-screen">
+    <div className="w-1/4 p-4 bg-gray-100 h-screen overflow-y-auto">
       <h2 className="text-xl font-bold mb-4">Elements</h2>
       <div
         draggable

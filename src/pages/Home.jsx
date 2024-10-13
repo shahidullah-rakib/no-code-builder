@@ -32,7 +32,7 @@ const Home = () => {
         onSourceCode={() => setSourceCodeOpen(true)} // Open Source Code Modal
       />
 
-      <div className="flex flex-1">
+      <div className="flex flex-1 overflow-hidden">
         {/* Sidebar and Canvas components */}
         <Sidebar />
         <Canvas setSelectedElement={setSelectedElement} />
