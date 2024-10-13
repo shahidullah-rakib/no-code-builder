@@ -22,9 +22,6 @@ const ElementSettings = ({ element }) => {
   const [letterSpacing, setLetterSpacing] = useState(
     element.styles.letterSpacing || '0px'
   ); // New state for letter spacing
-  const [listStyleType, setListStyleType] = useState(
-    element.styles.listStyleType || 'none'
-  ); // New state for list style type
 
   // For image resizing and content
   const [imageSrc, setImageSrc] = useState(element.content || '');
@@ -44,7 +41,6 @@ const ElementSettings = ({ element }) => {
     setFontStyle(element.styles.fontStyle || 'normal'); // Update fontStyle state
     setLineHeight(element.styles.lineHeight || '1.5'); // Update lineHeight state
     setLetterSpacing(element.styles.letterSpacing || '0px'); // Update letterSpacing state
-    setListStyleType(element.styles.listStyleType || 'none'); // Update listStyleType state
   }, [element]);
 
   const dispatchUpdate = () => {
@@ -56,7 +52,6 @@ const ElementSettings = ({ element }) => {
       fontStyle, // Include font style in updated styles
       lineHeight, // Include line height in updated styles
       letterSpacing, // Include letter spacing in updated styles
-      listStyleType, // Include list style type in updated styles
     };
 
     dispatch(
@@ -180,22 +175,6 @@ const ElementSettings = ({ element }) => {
             className="border p-2 w-full"
             step="0.1"
           />
-
-          {/* List Style Type Selection */}
-          <label>List Style Type:</label>
-          <select
-            value={listStyleType}
-            onChange={(e) => {
-              setListStyleType(e.target.value);
-              dispatchUpdate(); // Update when changing list style type
-            }}
-            className="border p-2 w-full"
-          >
-            <option value="none">None</option>
-            <option value="disc">Dot (disc)</option>
-            <option value="circle">Circle</option>
-            <option value="decimal">Numbered</option>
-          </select>
         </div>
       )}
 

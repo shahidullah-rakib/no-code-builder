@@ -94,8 +94,11 @@ const Canvas = ({ setSelectedElement }) => {
                 height: el.styles.height,
                 overflow: 'hidden',
                 wordWrap: 'break-word',
-                listStyleType: el.styles.listStyleType, // Apply the selected list style type
-                marginLeft: el.styles.listStyleType !== 'none' ? '20px' : '0', // Adjust margin for list styles
+                textAlign: el.styles.textAlign, // Text alignment
+                fontFamily: el.styles.fontFamily, // Font family
+                fontStyle: el.styles.fontStyle, // Font style
+                lineHeight: el.styles.lineHeight, // Line height
+                letterSpacing: el.styles.letterSpacing, // Letter spacing
               }}
             >
               {el.content}
